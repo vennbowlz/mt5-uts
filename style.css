@@ -1,0 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+:root {
+    /* Colors */
+    --background-color: #ebeae8;
+    --accent-color: #c07a35;
+    --text-color: #1a1a1a;
+    --text-muted-color: #888888;
+    --surface-light: #ebeae8;
+    --surface-dark: #1a1a1a;
+    --text-on-dark: #ebeae8;
+    --border-color: rgba(0, 0, 0, 0.12);
+    --shadow-color: rgba(0, 0, 0, 0.06);
+
+    /* Typography */
+    --font-header: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --tight-tracking: -0.03em;
+
+    /* Spacing */
+    --section-padding: 60px;
+    --card-radius: 0px;
+
+    /* Carousel control — pushed outside the slide */
+    --control-offset: -60px;
+    --control-size: 44px;
+}
+
+/* ─── Base ───────────────────────────────────────────── */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: var(--font-body);
+    color: var(--text-color);
+    margin: 0;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+section, .hero-section, .carousel-container {
+    /* Tell each section where to snap */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    height: 100vh;
+}
+
+/* ─── Hero Section ───────────────────────────────────── */
+
+.hero-section {
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-color);
+    color: var(--text-color);
+    text-align: center;
+}
+
+h1 {
+    font-family: var(--font-header);
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: var(--tight-tracking);
+    line-height: 1.1;
+    color: var(--text-color);
+    margin-bottom: 0.1em;
+}
+
+/* Bold non-italic subtitle directly beneath main title */
+.hero-section .lead {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    color: var(--text-color);
+    margin-bottom: 0.75em;
+}
+
+/* Accent rule */
+.hero-section::after {
+    display: none; /* use inline .hero-rule element instead */
+}
+
+.hero-rule {
+    width: 36px;
+    height: 2px;
+    background: var(--accent-color);
+    border: none;
+    margin: 0 auto;
+    display: block;
+}
+
+/* ─── Carousel Sections ──────────────────────────────── */
+
+.carousel-container {
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    /* Extra horizontal padding so outside controls don't clip */
+    padding: var(--section-padding) 80px;
+}
+
+.content-card {
+    width: 100%;
+    box-shadow: 0 8px 48px var(--shadow-color);
+    border-radius: var(--card-radius);
+    overflow: visible; /* controls sit outside the card */
+    height: calc(100vh - var(--section-padding) * 2);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.content-card .carousel,
+.content-card .carousel-inner {
+    flex: 1;
+    height: 100%;
+}
+
+.content-card .carousel {
+    position: relative;
+}
+
+.content-card .carousel-item {
+    height: 100%;
+}
+
+.carousel-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Stack H1 and Card vertically */
+    justify-content: center;
+    align-items: center;
+    padding: 20px 80px; /* Reduced padding to save vertical space */
+}
+
+.content-card {
+    /* Use a relative height to ensure it fits with the title */
+    height: 70vh; 
+    max-height: 600px; /* Prevents it from becoming too giant on big monitors */
+    width: 100%;
+    position: relative;
+    z-index: 1; /* Ensures buttons are clickable */
+}
+
+/* Ensure controls are clickable and on top */
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 10;
+    pointer-events: auto;
+}
+
+/* ─── Carousel Items ─────────────────────────────────── */
+
+.carousel-item {
+    min-height: 500px;
+    height: 100%;
+    padding: var(--section-padding);
+    background: var(--surface-light);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-dark .carousel-item {
+    background: var(--surface-dark);
+    color: var(--text-on-dark);
+}
+
+/* ─── Carousel Controls — outside the slide ─────────── */
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: var(--control-size);
+    height: var(--control-size);
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    opacity: 1;
+    background: var(--text-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.carousel-control-prev {
+    left: var(--control-offset);
+}
+
+.carousel-control-next {
+    right: var(--control-offset);
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: var(--accent-color);
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 14px;
+    height: 14px;
+    filter: none; /* icons are white by default */
+}
+
+/* ─── Section Titles ─────────────────────────────────── */
+
+.section-title {
+    font-family: var(--font-header);
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: var(--tight-tracking);
+    display: inline-block;
+    margin-bottom: 6px;
+    border-bottom: none; /* replaced by .section-title-rule */
+}
+
+.section-title-rule {
+    width: 36px;
+    height: 2px;
+    background: var(--accent-color);
+    border: none;
+    margin: 0 auto 28px;
+    display: block;
+}
+
+/* ─── Body Typography ────────────────────────────────── */
+
+h3 {
+    font-family: var(--font-header);
+    font-weight: 700;
+    letter-spacing: var(--tight-tracking);
+}
+
+strong {
+    font-weight: 700;
+}
+
+blockquote p {
+    font-family: var(--font-header);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.65;
+}
+
+/* ─── Profile / images ───────────────────────────────── */
+
+.profile-img {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+/* ─── List group — dark card overrides ──────────────── */
+
+.bg-dark .list-group-item {
+    background: transparent;
+    color: var(--text-on-dark);
+    border-color: rgba(255, 255, 255, 0.1);
+}
