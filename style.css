@@ -34,6 +34,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory; /* Moved here */
 }
 
 body {
@@ -41,9 +42,7 @@ body {
     font-family: var(--font-body);
     color: var(--text-color);
     margin: 0;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
+    /* Removed scroll-snap, overflow-y, and height from body! */
 }
 
 section, .hero-section, .carousel-container {
@@ -122,12 +121,6 @@ h1 {
     position: relative;
 }
 
-.content-card .carousel,
-.content-card .carousel-inner {
-    flex: 1;
-    height: 100%;
-}
-
 .content-card .carousel {
     position: relative;
 }
@@ -168,7 +161,7 @@ h1 {
     height: 100%;
     padding: var(--section-padding);
     background: var(--surface-light);
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
